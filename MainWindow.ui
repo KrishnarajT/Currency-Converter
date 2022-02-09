@@ -16,7 +16,7 @@
   <property name="styleSheet">
    <string notr="true">background-color: rgb(204, 183, 198);</string>
   </property>
-  <widget class="QTabWidget" name="tabWidget">
+  <widget class="QTabWidget" name="Navigation_tab">
    <property name="geometry">
     <rect>
      <x>0</x>
@@ -54,9 +54,9 @@
    </property>
    <widget class="QWidget" name="tab">
     <attribute name="title">
-     <string>Convert</string>
+     <string>convert_tab</string>
     </attribute>
-    <widget class="QComboBox" name="comboBox_5">
+    <widget class="QComboBox" name="curncy_7_combo_box">
      <property name="geometry">
       <rect>
        <x>300</x>
@@ -66,7 +66,7 @@
       </rect>
      </property>
     </widget>
-    <widget class="QLabel" name="label_6">
+    <widget class="QLabel" name="curncy_4_value_lbl">
      <property name="geometry">
       <rect>
        <x>740</x>
@@ -88,7 +88,7 @@
       <string>9999.99</string>
      </property>
     </widget>
-    <widget class="QComboBox" name="comboBox_7">
+    <widget class="QComboBox" name="curncy_4_combo_box">
      <property name="geometry">
       <rect>
        <x>640</x>
@@ -98,7 +98,7 @@
       </rect>
      </property>
     </widget>
-    <widget class="QComboBox" name="comboBox_2">
+    <widget class="QComboBox" name="curncy_2_combo_box">
      <property name="geometry">
       <rect>
        <x>610</x>
@@ -108,7 +108,7 @@
       </rect>
      </property>
     </widget>
-    <widget class="QDateEdit" name="dateEdit">
+    <widget class="QDateEdit" name="date_edit">
      <property name="geometry">
       <rect>
        <x>540</x>
@@ -127,7 +127,7 @@
       <string notr="true">color:rgb(72, 60, 70);</string>
      </property>
     </widget>
-    <widget class="QLabel" name="label_4">
+    <widget class="QLabel" name="curncy_6_value_lbl">
      <property name="geometry">
       <rect>
        <x>740</x>
@@ -149,7 +149,7 @@
       <string>9999.99</string>
      </property>
     </widget>
-    <widget class="QLabel" name="label_2">
+    <widget class="QLabel" name="curncy_5_value_lbl">
      <property name="geometry">
       <rect>
        <x>400</x>
@@ -171,7 +171,7 @@
       <string>9999.99</string>
      </property>
     </widget>
-    <widget class="QLabel" name="label_5">
+    <widget class="QLabel" name="curncy_8_value_lbl">
      <property name="geometry">
       <rect>
        <x>740</x>
@@ -193,7 +193,7 @@
       <string>9999.99</string>
      </property>
     </widget>
-    <widget class="QComboBox" name="comboBox">
+    <widget class="QComboBox" name="curncy_1_combo_box">
      <property name="geometry">
       <rect>
        <x>210</x>
@@ -203,7 +203,7 @@
       </rect>
      </property>
     </widget>
-    <widget class="QComboBox" name="comboBox_4">
+    <widget class="QComboBox" name="curncy_5_combo_box">
      <property name="geometry">
       <rect>
        <x>300</x>
@@ -213,7 +213,7 @@
       </rect>
      </property>
     </widget>
-    <widget class="QLabel" name="label_3">
+    <widget class="QLabel" name="curncy_7_value_lbl">
      <property name="geometry">
       <rect>
        <x>400</x>
@@ -235,7 +235,7 @@
       <string>9999.99</string>
      </property>
     </widget>
-    <widget class="QComboBox" name="comboBox_6">
+    <widget class="QComboBox" name="curncy_8_combo_box">
      <property name="geometry">
       <rect>
        <x>640</x>
@@ -245,7 +245,7 @@
       </rect>
      </property>
     </widget>
-    <widget class="QLabel" name="label_7">
+    <widget class="QLabel" name="date_label">
      <property name="geometry">
       <rect>
        <x>390</x>
@@ -267,7 +267,7 @@
       <string>On Date</string>
      </property>
     </widget>
-    <widget class="QLabel" name="label">
+    <widget class="QLabel" name="curncy_3_value_lbl">
      <property name="geometry">
       <rect>
        <x>400</x>
@@ -289,7 +289,7 @@
       <string>9999.99</string>
      </property>
     </widget>
-    <widget class="QTextEdit" name="textEdit">
+    <widget class="QTextEdit" name="curncy_1_text_edit">
      <property name="geometry">
       <rect>
        <x>330</x>
@@ -305,7 +305,7 @@
       </font>
      </property>
     </widget>
-    <widget class="QComboBox" name="comboBox_3">
+    <widget class="QComboBox" name="curncy_3_combo_box">
      <property name="geometry">
       <rect>
        <x>300</x>
@@ -315,7 +315,7 @@
       </rect>
      </property>
     </widget>
-    <widget class="QComboBox" name="comboBox_8">
+    <widget class="QComboBox" name="curncy_6_combo_box">
      <property name="geometry">
       <rect>
        <x>640</x>
@@ -347,7 +347,7 @@
       <string>Find out Exchange Rates on Any Date</string>
      </property>
     </widget>
-    <widget class="QTextEdit" name="textEdit_2">
+    <widget class="QTextEdit" name="curncy_2_text_edit">
      <property name="geometry">
       <rect>
        <x>730</x>
@@ -363,7 +363,7 @@
       </font>
      </property>
     </widget>
-    <widget class="QPushButton" name="pushButton">
+    <widget class="QPushButton" name="convert_btn">
      <property name="geometry">
       <rect>
        <x>410</x>
@@ -391,9 +391,9 @@
    </widget>
    <widget class="QWidget" name="tab_2">
     <attribute name="title">
-     <string>Past Week</string>
+     <string>past_week_tab</string>
     </attribute>
-    <widget class="QLabel" name="label_8">
+    <widget class="QLabel" name="week_text_lbl">
      <property name="geometry">
       <rect>
        <x>300</x>
@@ -415,7 +415,7 @@
       <string>The Value of INR to QAR in the past week</string>
      </property>
     </widget>
-    <widget class="QFrame" name="frame_2">
+    <widget class="QFrame" name="week_graph_frame">
      <property name="geometry">
       <rect>
        <x>170</x>
@@ -434,9 +434,9 @@
    </widget>
    <widget class="QWidget" name="tab_3">
     <attribute name="title">
-     <string>Historical Data</string>
+     <string>historical_data_tab</string>
     </attribute>
-    <widget class="QLabel" name="label_9">
+    <widget class="QLabel" name="historical_text_lbl">
      <property name="geometry">
       <rect>
        <x>350</x>
@@ -458,7 +458,7 @@
       <string>The Value of INR to QAR in the past</string>
      </property>
     </widget>
-    <widget class="QFrame" name="frame_3">
+    <widget class="QFrame" name="historical_graph_frame">
      <property name="geometry">
       <rect>
        <x>170</x>
@@ -476,7 +476,7 @@
     </widget>
    </widget>
   </widget>
-  <widget class="QFrame" name="frame">
+  <widget class="QFrame" name="Title_frame">
    <property name="geometry">
     <rect>
      <x>0</x>
