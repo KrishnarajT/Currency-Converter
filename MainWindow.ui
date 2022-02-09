@@ -44,7 +44,7 @@
     <string notr="true">background-color: white;</string>
    </property>
    <property name="tabPosition">
-    <enum>QTabWidget::West</enum>
+    <enum>QTabWidget::North</enum>
    </property>
    <property name="tabShape">
     <enum>QTabWidget::Rounded</enum>
@@ -59,8 +59,8 @@
     <widget class="QComboBox" name="curncy_7_combo_box">
      <property name="geometry">
       <rect>
-       <x>300</x>
-       <y>380</y>
+       <x>240</x>
+       <y>370</y>
        <width>71</width>
        <height>31</height>
       </rect>
@@ -69,8 +69,8 @@
     <widget class="QLabel" name="curncy_4_value_lbl">
      <property name="geometry">
       <rect>
-       <x>740</x>
-       <y>280</y>
+       <x>680</x>
+       <y>270</y>
        <width>111</width>
        <height>31</height>
       </rect>
@@ -91,8 +91,8 @@
     <widget class="QComboBox" name="curncy_4_combo_box">
      <property name="geometry">
       <rect>
-       <x>640</x>
-       <y>280</y>
+       <x>580</x>
+       <y>270</y>
        <width>71</width>
        <height>31</height>
       </rect>
@@ -101,8 +101,8 @@
     <widget class="QComboBox" name="curncy_2_combo_box">
      <property name="geometry">
       <rect>
-       <x>610</x>
-       <y>150</y>
+       <x>550</x>
+       <y>140</y>
        <width>71</width>
        <height>31</height>
       </rect>
@@ -111,8 +111,8 @@
     <widget class="QDateEdit" name="date_edit">
      <property name="geometry">
       <rect>
-       <x>540</x>
-       <y>480</y>
+       <x>480</x>
+       <y>470</y>
        <width>191</width>
        <height>31</height>
       </rect>
@@ -130,8 +130,8 @@
     <widget class="QLabel" name="curncy_6_value_lbl">
      <property name="geometry">
       <rect>
-       <x>740</x>
-       <y>330</y>
+       <x>680</x>
+       <y>320</y>
        <width>111</width>
        <height>31</height>
       </rect>
@@ -152,8 +152,8 @@
     <widget class="QLabel" name="curncy_5_value_lbl">
      <property name="geometry">
       <rect>
-       <x>400</x>
-       <y>330</y>
+       <x>340</x>
+       <y>320</y>
        <width>111</width>
        <height>31</height>
       </rect>
@@ -174,8 +174,8 @@
     <widget class="QLabel" name="curncy_8_value_lbl">
      <property name="geometry">
       <rect>
-       <x>740</x>
-       <y>380</y>
+       <x>680</x>
+       <y>370</y>
        <width>111</width>
        <height>31</height>
       </rect>
@@ -196,8 +196,8 @@
     <widget class="QComboBox" name="curncy_1_combo_box">
      <property name="geometry">
       <rect>
-       <x>210</x>
-       <y>150</y>
+       <x>150</x>
+       <y>140</y>
        <width>71</width>
        <height>31</height>
       </rect>
@@ -206,8 +206,8 @@
     <widget class="QComboBox" name="curncy_5_combo_box">
      <property name="geometry">
       <rect>
-       <x>300</x>
-       <y>330</y>
+       <x>240</x>
+       <y>320</y>
        <width>71</width>
        <height>31</height>
       </rect>
@@ -216,8 +216,8 @@
     <widget class="QLabel" name="curncy_7_value_lbl">
      <property name="geometry">
       <rect>
-       <x>400</x>
-       <y>380</y>
+       <x>340</x>
+       <y>370</y>
        <width>111</width>
        <height>31</height>
       </rect>
@@ -238,8 +238,8 @@
     <widget class="QComboBox" name="curncy_8_combo_box">
      <property name="geometry">
       <rect>
-       <x>640</x>
-       <y>380</y>
+       <x>580</x>
+       <y>370</y>
        <width>71</width>
        <height>31</height>
       </rect>
@@ -248,8 +248,8 @@
     <widget class="QLabel" name="date_label">
      <property name="geometry">
       <rect>
-       <x>390</x>
-       <y>480</y>
+       <x>330</x>
+       <y>470</y>
        <width>111</width>
        <height>31</height>
       </rect>
@@ -270,8 +270,8 @@
     <widget class="QLabel" name="curncy_3_value_lbl">
      <property name="geometry">
       <rect>
-       <x>400</x>
-       <y>280</y>
+       <x>340</x>
+       <y>270</y>
        <width>111</width>
        <height>31</height>
       </rect>
@@ -292,8 +292,8 @@
     <widget class="QTextEdit" name="curncy_1_text_edit">
      <property name="geometry">
       <rect>
-       <x>330</x>
-       <y>150</y>
+       <x>270</x>
+       <y>140</y>
        <width>191</width>
        <height>31</height>
       </rect>
@@ -308,8 +308,8 @@
     <widget class="QComboBox" name="curncy_3_combo_box">
      <property name="geometry">
       <rect>
-       <x>300</x>
-       <y>280</y>
+       <x>240</x>
+       <y>270</y>
        <width>71</width>
        <height>31</height>
       </rect>
@@ -318,8 +318,8 @@
     <widget class="QComboBox" name="curncy_6_combo_box">
      <property name="geometry">
       <rect>
-       <x>640</x>
-       <y>330</y>
+       <x>580</x>
+       <y>320</y>
        <width>71</width>
        <height>31</height>
       </rect>
@@ -328,8 +328,8 @@
     <widget class="QLabel" name="label_10">
      <property name="geometry">
       <rect>
-       <x>340</x>
-       <y>40</y>
+       <x>280</x>
+       <y>30</y>
        <width>501</width>
        <height>31</height>
       </rect>
@@ -350,8 +350,8 @@
     <widget class="QTextEdit" name="curncy_2_text_edit">
      <property name="geometry">
       <rect>
-       <x>730</x>
-       <y>150</y>
+       <x>670</x>
+       <y>140</y>
        <width>191</width>
        <height>31</height>
       </rect>
@@ -366,8 +366,8 @@
     <widget class="QPushButton" name="convert_btn">
      <property name="geometry">
       <rect>
-       <x>410</x>
-       <y>530</y>
+       <x>350</x>
+       <y>520</y>
        <width>311</width>
        <height>31</height>
       </rect>
@@ -396,8 +396,8 @@
     <widget class="QLabel" name="week_text_lbl">
      <property name="geometry">
       <rect>
-       <x>300</x>
-       <y>30</y>
+       <x>230</x>
+       <y>20</y>
        <width>501</width>
        <height>31</height>
       </rect>
@@ -418,10 +418,10 @@
     <widget class="QFrame" name="week_graph_frame">
      <property name="geometry">
       <rect>
-       <x>170</x>
-       <y>90</y>
-       <width>751</width>
-       <height>441</height>
+       <x>80</x>
+       <y>80</y>
+       <width>800</width>
+       <height>450</height>
       </rect>
      </property>
      <property name="frameShape">
@@ -439,7 +439,7 @@
     <widget class="QLabel" name="historical_text_lbl">
      <property name="geometry">
       <rect>
-       <x>350</x>
+       <x>280</x>
        <y>30</y>
        <width>441</width>
        <height>31</height>
@@ -461,10 +461,10 @@
     <widget class="QFrame" name="historical_graph_frame">
      <property name="geometry">
       <rect>
-       <x>170</x>
-       <y>90</y>
-       <width>751</width>
-       <height>441</height>
+       <x>80</x>
+       <y>80</y>
+       <width>800</width>
+       <height>450</height>
       </rect>
      </property>
      <property name="frameShape">
