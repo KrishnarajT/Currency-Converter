@@ -1,7 +1,8 @@
 import requests, json, os, urllib
-import PIL
-from datetime import date, timedelta
+import PIL, os
+from datetime import date, timedelta, datetime
 import pandas as pd
+import matplotlib.pyplot as plt
 
 def query_all_data():
     # """
@@ -44,7 +45,7 @@ def convert_currency(cur1, cur2, database):
     Returns: how many cur2 is 1 cur1
     """
     
-    
+    print(database)
     # these are values from EUR to the respective currencies
     base_cur1_value = database.loc[cur1]['rates'] # Say INR for eg
     base_cur2_value = database.loc[cur2]['rates'] # Say QAR for eg
@@ -54,22 +55,28 @@ def convert_currency(cur1, cur2, database):
     converted_val = (1/base_cur1_value) * base_cur2_value
     return converted_val
     
-def make_weekly_chart(cur1, cur2, currency_datebase):
+def make_weekly_chart(cur1, cur2, currency_database):
     weekly_data = []
     weekly_date = []
-    date = date.today()
+    _date = datetime.strptime(gen_latest_currency_database(currency_database)['date'][0], "%Y-%m-%d").date()
     time_delta_date = timedelta(days = -1)
     for i in range(7):
-        latest_currency_database = currency_database[currency_database['date'] == date.isoformat()]
-        date = date + time_delta_date
+        weekly_date.append(_date.day)
+        latest_currency_database = currency_database[currency_database['date'] == _date.isoformat()]
+        _date = _date + time_delta_date
         weekly_data.append(convert_currency(cur1, cur2, latest_currency_database))
-        weekly_date.append(date.day)
     plt.style.use('ggplot')
-    plt.figure(figsize = (10, 7))
+    plt.figure(figsize = (10, 6))
     plt.xlabel('Weekdays')
     plt.ylabel('Value')
-    plt.title('Value of {cur1} to {cur2} in the Past Week')
-    plt.plot(weekly_date, weekly_data, linewidth = 1.5)
-    plt.savefig('sth.png', dpi=300)
+    plt.plot(weekly_date, weekly_data, linewidth = 1.5, marker = 'o')
+    # plt.title(f'Value of {cur1} to {cur2} in the Past Week')
+    plt.savefig(os.path.join(os.getcwd(), "images", f'{cur1} to {cur2} in the past Week.png'), dpi=300)
     
     
+def gen_latest_currency_database(currency_database):
+    dates = [datetime.strptime(i, "%Y-%m-%d") for i in list(currency_database.loc['USD']['date'])]
+    dates.sort()
+    latest_date = dates[-1]
+    latest_currency_database = currency_database[currency_database['date'] == latest_date.date().isoformat()]
+    return latest_currency_database

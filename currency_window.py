@@ -10,17 +10,21 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5 import QtWidgets
-from PyQt5.QtWidgets import QApplication, QMainWindow
-import sys
+from PyQt5.QtWidgets import QApplication, QMainWindow, QLabel
+import sys, os
 import currency as cd
 from datetime import date, timedelta
 from PyQt5 import QtGui
+import numpy as np
+import pandas as pd
+from PyQt5.QtGui import QPixmap
 
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
         self.currency_database = cd.query_all_data()
-    
+        self.latest_currency_database = cd.gen_latest_currency_database(self.currency_database)
+        
         # Setting some basic parameters
         self.setObjectName("Currency Converter")
         self.resize(1000, 700)
@@ -31,14 +35,71 @@ class MainWindow(QMainWindow):
     
     def convert(self):
         print('you pressed to convert')
-        self.cur_1_value = float(self.curncy_1_line_edit.text())
-        print(self.cur_1_value)
+        
+        # Setting the date and making the relevant currency_database
+        
         self.selected_date = self.date_edit.date().toPyDate()
-        print(self.selected_date)
         self.dated_currency_database = self.currency_database[self.currency_database['date'] == self.selected_date.isoformat()]
-        print(self.cur1, self.cur2, self.dated_currency_database)
-        self.cur_2_value = cd.convert_currency(self.cur1, self.cur2, self.dated_currency_database)
+        
+        print(self.currency_database)
+        
+        # Getting the currently selected currencies. 
+        
+        self.cur1 = self.curncy_1_combo_box.currentText()
+        self.cur2 = self.curncy_2_combo_box.currentText()
+        self.cur3 = self.curncy_3_combo_box.currentText()
+        self.cur4 = self.curncy_4_combo_box.currentText()
+        self.cur5 = self.curncy_5_combo_box.currentText()
+        self.cur6 = self.curncy_6_combo_box.currentText()
+        self.cur7 = self.curncy_7_combo_box.currentText()
+        self.cur8 = self.curncy_8_combo_box.currentText()
+        
+        
+        # Getting the conversion value        
+        self.cur_1_value = float(self.curncy_1_line_edit.text())
+        
+        # Converting the currencies, and setting their values to the respective labels. 
+        
+        self.cur_2_value = self.cur_1_value * cd.convert_currency(self.cur1, self.cur2, self.dated_currency_database)
+        self.curncy_2_line_edit.setText(str(round(self.cur_2_value, 4)))
+        
+        self.cur_3_value = self.cur_1_value * cd.convert_currency(self.cur1, self.cur3, self.dated_currency_database)
+        self.curncy_3_value_lbl.setText(str(round(self.cur_3_value, 4)))
+        
+        self.cur_4_value = self.cur_1_value * cd.convert_currency(self.cur1, self.cur4, self.dated_currency_database)
+        self.curncy_4_value_lbl.setText(str(round(self.cur_4_value, 4)))
+        
+        self.cur_5_value = self.cur_1_value * cd.convert_currency(self.cur1, self.cur5, self.dated_currency_database)
+        self.curncy_5_value_lbl.setText(str(round(self.cur_5_value, 4)))
+        
+        self.cur_6_value = self.cur_1_value * cd.convert_currency(self.cur1, self.cur6, self.dated_currency_database)
+        self.curncy_6_value_lbl.setText(str(round(self.cur_6_value, 4)))
+        
+        self.cur_7_value = self.cur_1_value * cd.convert_currency(self.cur1, self.cur7, self.dated_currency_database)
+        self.curncy_7_value_lbl.setText(str(round(self.cur_7_value, 4)))
+        
+        self.cur_8_value = self.cur_1_value * cd.convert_currency(self.cur1, self.cur8, self.dated_currency_database)
+        self.curncy_8_value_lbl.setText(str(round(self.cur_8_value, 4)))
+        
+        # Debugging
+        
+        print(self.selected_date)
+        print(self.cur1, self.cur2, 'are the selected currencies')
+        print(self.dated_currency_database)
         print(self.cur_2_value)
+    
+        # Add the Graph for Past week Data. 
+    
+        cd.make_weekly_chart(self.cur1, self.cur2, self.currency_database)    
+        self.im = QPixmap(os.path.join(os.getcwd(), 'images', f'{self.cur1} to {self.cur2} in the past Week.png'))
+        self.im = self.im.scaledToHeight(self.week_graph_frame.height())
+        self.label = QLabel(self.week_graph_frame)
+        self.label.setPixmap(self.im)
+        self.label.resize(self.im.width(), self.im.height())
+        self.week_text_lbl.setText(f'Value of {self.cur1} to {self.cur2} in the Past Week')
+    
+    
+    
     
     def setupUi(self):
         
@@ -75,11 +136,11 @@ class MainWindow(QMainWindow):
         self.curncy_7_combo_box = QtWidgets.QComboBox(self.convert_tab)
         self.curncy_7_combo_box.setGeometry(QtCore.QRect(240, 370, 90, 31))
         self.curncy_7_combo_box.setObjectName("curncy_7_combo_box")
-        self.curncy_7_combo_box.addItems(list(self.currency_database.index))
+        self.curncy_7_combo_box.addItems(list(self.latest_currency_database.index))
         
         font.setPointSize(18)
         self.curncy_4_value_lbl = QtWidgets.QLabel(self.convert_tab)
-        self.curncy_4_value_lbl.setGeometry(QtCore.QRect(680, 270, 111, 31))
+        self.curncy_4_value_lbl.setGeometry(QtCore.QRect(680, 270, 200, 31))
         self.curncy_4_value_lbl.setFont(font)
         self.curncy_4_value_lbl.setStyleSheet("color:rgb(72, 60, 70);")
         self.curncy_4_value_lbl.setObjectName("curncy_4_value_lbl")
@@ -88,13 +149,13 @@ class MainWindow(QMainWindow):
         self.curncy_4_combo_box = QtWidgets.QComboBox(self.convert_tab)
         self.curncy_4_combo_box.setGeometry(QtCore.QRect(580, 270, 90, 31))
         self.curncy_4_combo_box.setObjectName("curncy_4_combo_box")
-        self.curncy_4_combo_box.addItems(list(self.currency_database.index))
+        self.curncy_4_combo_box.addItems(list(self.latest_currency_database.index))
         
         
         self.curncy_2_combo_box = QtWidgets.QComboBox(self.convert_tab)
         self.curncy_2_combo_box.setGeometry(QtCore.QRect(550, 140, 90, 31))
         self.curncy_2_combo_box.setObjectName("curncy_2_combo_box")
-        self.curncy_2_combo_box.addItems(list(self.currency_database.index))
+        self.curncy_2_combo_box.addItems(list(self.latest_currency_database.index))
         self.curncy_2_combo_box.setCurrentIndex(66)
         self.cur2 = self.curncy_2_combo_box.currentText()
 
@@ -109,19 +170,19 @@ class MainWindow(QMainWindow):
 
         font.setPointSize(18)
         self.curncy_6_value_lbl = QtWidgets.QLabel(self.convert_tab)
-        self.curncy_6_value_lbl.setGeometry(QtCore.QRect(680, 320, 111, 31))
+        self.curncy_6_value_lbl.setGeometry(QtCore.QRect(680, 320, 200, 31))
         self.curncy_6_value_lbl.setFont(font)
         self.curncy_6_value_lbl.setStyleSheet("color:rgb(72, 60, 70);")
         self.curncy_6_value_lbl.setObjectName("curncy_6_value_lbl")
         
         self.curncy_5_value_lbl = QtWidgets.QLabel(self.convert_tab)
-        self.curncy_5_value_lbl.setGeometry(QtCore.QRect(340, 320, 111, 31))
+        self.curncy_5_value_lbl.setGeometry(QtCore.QRect(340, 320, 200, 31))
         self.curncy_5_value_lbl.setFont(font)
         self.curncy_5_value_lbl.setStyleSheet("color:rgb(72, 60, 70);")
         self.curncy_5_value_lbl.setObjectName("curncy_5_value_lbl")
         
         self.curncy_8_value_lbl = QtWidgets.QLabel(self.convert_tab)
-        self.curncy_8_value_lbl.setGeometry(QtCore.QRect(680, 370, 111, 31))
+        self.curncy_8_value_lbl.setGeometry(QtCore.QRect(680, 370, 200, 31))
         self.curncy_8_value_lbl.setFont(font)
         self.curncy_8_value_lbl.setStyleSheet("color:rgb(72, 60, 70);")
         self.curncy_8_value_lbl.setObjectName("curncy_8_value_lbl")
@@ -129,17 +190,16 @@ class MainWindow(QMainWindow):
         self.curncy_1_combo_box = QtWidgets.QComboBox(self.convert_tab)
         self.curncy_1_combo_box.setGeometry(QtCore.QRect(150, 140, 90, 31))
         self.curncy_1_combo_box.setObjectName("curncy_1_combo_box")
-        self.curncy_1_combo_box.addItems(list(self.currency_database.index))
-        self.cur1 = self.curncy_1_combo_box.currentText()
+        self.curncy_1_combo_box.addItems(list(self.latest_currency_database.index))
         
         
         self.curncy_5_combo_box = QtWidgets.QComboBox(self.convert_tab)
         self.curncy_5_combo_box.setGeometry(QtCore.QRect(240, 320, 90, 31))
         self.curncy_5_combo_box.setObjectName("curncy_5_combo_box")
-        self.curncy_5_combo_box.addItems(list(self.currency_database.index))
+        self.curncy_5_combo_box.addItems(list(self.latest_currency_database.index))
         
         self.curncy_7_value_lbl = QtWidgets.QLabel(self.convert_tab)
-        self.curncy_7_value_lbl.setGeometry(QtCore.QRect(340, 370, 111, 31))
+        self.curncy_7_value_lbl.setGeometry(QtCore.QRect(340, 370, 200, 31))
         self.curncy_7_value_lbl.setFont(font)
         self.curncy_7_value_lbl.setStyleSheet("color:rgb(72, 60, 70);")
         self.curncy_7_value_lbl.setObjectName("curncy_7_value_lbl")
@@ -147,7 +207,7 @@ class MainWindow(QMainWindow):
         self.curncy_8_combo_box = QtWidgets.QComboBox(self.convert_tab)
         self.curncy_8_combo_box.setGeometry(QtCore.QRect(580, 370, 90, 31))
         self.curncy_8_combo_box.setObjectName("curncy_8_combo_box")
-        self.curncy_8_combo_box.addItems(list(self.currency_database.index))
+        self.curncy_8_combo_box.addItems(list(self.latest_currency_database.index))
         
         self.date_label = QtWidgets.QLabel(self.convert_tab)
         self.date_label.setGeometry(QtCore.QRect(330, 470, 111, 31))
@@ -159,7 +219,7 @@ class MainWindow(QMainWindow):
         
         font.setPointSize(18)
         self.curncy_3_value_lbl = QtWidgets.QLabel(self.convert_tab)
-        self.curncy_3_value_lbl.setGeometry(QtCore.QRect(340, 270, 111, 31))
+        self.curncy_3_value_lbl.setGeometry(QtCore.QRect(340, 270, 200, 31))
         self.curncy_3_value_lbl.setFont(font)
         self.curncy_3_value_lbl.setStyleSheet("color:rgb(72, 60, 70);")
         self.curncy_3_value_lbl.setObjectName("curncy_3_value_lbl")
@@ -174,12 +234,12 @@ class MainWindow(QMainWindow):
         self.curncy_3_combo_box = QtWidgets.QComboBox(self.convert_tab)
         self.curncy_3_combo_box.setGeometry(QtCore.QRect(240, 270, 90, 31))
         self.curncy_3_combo_box.setObjectName("curncy_3_combo_box")
-        self.curncy_3_combo_box.addItems(list(self.currency_database.index))
+        self.curncy_3_combo_box.addItems(list(self.latest_currency_database.index))
         
         self.curncy_6_combo_box = QtWidgets.QComboBox(self.convert_tab)
         self.curncy_6_combo_box.setGeometry(QtCore.QRect(580, 320, 90, 31))
         self.curncy_6_combo_box.setObjectName("curncy_6_combo_box")
-        self.curncy_6_combo_box.addItems(list(self.currency_database.index))
+        self.curncy_6_combo_box.addItems(list(self.latest_currency_database.index))
         
         font.setPointSize(18)
         self.label_10 = QtWidgets.QLabel(self.convert_tab)
@@ -213,7 +273,7 @@ class MainWindow(QMainWindow):
         # Adding the elements inside the tab. 
        
         self.week_text_lbl = QtWidgets.QLabel(self.past_week_tab)
-        self.week_text_lbl.setGeometry(QtCore.QRect(230, 20, 501, 31))
+        self.week_text_lbl.setGeometry(QtCore.QRect(280, 20, 501, 31))
 
         font.setPointSize(18)
         self.week_text_lbl.setFont(font)
@@ -221,7 +281,7 @@ class MainWindow(QMainWindow):
         self.week_text_lbl.setObjectName("week_text_lbl")
        
         self.week_graph_frame = QtWidgets.QFrame(self.past_week_tab)
-        self.week_graph_frame.setGeometry(QtCore.QRect(80, 80, 800, 450))
+        self.week_graph_frame.setGeometry(QtCore.QRect(120, 80, 750, 450))
         self.week_graph_frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.week_graph_frame.setFrameShadow(QtWidgets.QFrame.Raised)
         self.week_graph_frame.setObjectName("week_graph_frame")
@@ -310,14 +370,14 @@ class MainWindow(QMainWindow):
         
         # Setting the default values of the combo boxes
         
-        self.curncy_1_combo_box.setCurrentIndex(149)
-        self.curncy_2_combo_box.setCurrentIndex(67)
-        self.curncy_3_combo_box.setCurrentIndex(89)
-        self.curncy_4_combo_box.setCurrentIndex(64)
-        self.curncy_5_combo_box.setCurrentIndex(12)
-        self.curncy_6_combo_box.setCurrentIndex(1)
-        self.curncy_7_combo_box.setCurrentIndex(98)
-        self.curncy_8_combo_box.setCurrentIndex(130)
+        self.curncy_1_combo_box.setCurrentIndex(int(np.where(self.latest_currency_database.index == 'USD')[0]))
+        self.curncy_2_combo_box.setCurrentIndex(int(np.where(self.latest_currency_database.index == 'INR')[0]))
+        self.curncy_3_combo_box.setCurrentIndex(int(np.where(self.latest_currency_database.index == 'QAR')[0]))
+        self.curncy_4_combo_box.setCurrentIndex(int(np.where(self.latest_currency_database.index == 'EUR')[0]))
+        self.curncy_5_combo_box.setCurrentIndex(int(np.where(self.latest_currency_database.index == 'BTC')[0]))
+        self.curncy_6_combo_box.setCurrentIndex(int(np.where(self.latest_currency_database.index == 'JPY')[0]))
+        self.curncy_7_combo_box.setCurrentIndex(int(np.where(self.latest_currency_database.index == 'SAR')[0]))
+        self.curncy_8_combo_box.setCurrentIndex(int(np.where(self.latest_currency_database.index == 'AED')[0]))
         
         
         self.date_edit.setDate(date.today() + timedelta(days =-1))
