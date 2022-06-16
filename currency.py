@@ -27,12 +27,12 @@ def query_all_data():
         return currency_database
     elif os.path.exists(os.path.join(os.getcwd(), 'data', f'{yesterdays_date} currency_database.csv')):
         print('found existing database -------------------------------------------------------------------------------------------------------')
-        currency_database = pd.read_csv(os.path.join(os.getcwd(), 'data', f'{todays_date} currency_database.csv'), index_col = 0)
+        currency_database = pd.read_csv(os.path.join(os.getcwd(), 'data', f'{yesterdays_date} currency_database.csv'), index_col = 0)
         updated_dates = [datetime.strptime(i, "%Y-%m-%d") for i in currency_database['date'].values]
         currency_database['date'] = updated_dates    
         return currency_database
         
-    # Checking if the API uploaded todays FX rates, and deciding the start data depending on that. 
+    # Checking if the API uploaded todays FX rates, and deciding the start date depending on that. 
     r = requests.get(f'http://api.exchangeratesapi.io/v1/{todays_date}?access_key={my_api_key}')
     if r.status_code != 200:
         print('They havent uploaded')

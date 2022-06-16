@@ -343,7 +343,9 @@ class MainWindow(QMainWindow):
 
         font.setPointSize(18)
         self.help_lbl = QtWidgets.QLabel(self.help_tab)
-        self.help_lbl.setText("Some text will be here. ")
+        self.help_lbl.setText("FX Rates are taken via API from https://exchangeratesapi.io, so thanks to them. \n \
+            Feel free to suggest anything to krishnaraj.kpt@outlook.com\n \
+            Visit https://github.com/KrishnarajT for more projects")
         self.help_lbl.setFont(font)
         self.help_lbl.setStyleSheet("color:rgb(72, 60, 70);")
         self.help_lbl.setObjectName("help_lbl")
