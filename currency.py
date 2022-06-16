@@ -24,14 +24,12 @@ def query_all_data():
         currency_database = pd.read_csv(os.path.join(os.getcwd(), 'data', f'{todays_date} currency_database.csv'), index_col = 0)
         updated_dates = [datetime.strptime(i, "%Y-%m-%d") for i in currency_database['date'].values]
         currency_database['date'] = updated_dates    
-        print(currency_database)
         return currency_database
     elif os.path.exists(os.path.join(os.getcwd(), 'data', f'{yesterdays_date} currency_database.csv')):
         print('found existing database -------------------------------------------------------------------------------------------------------')
         currency_database = pd.read_csv(os.path.join(os.getcwd(), 'data', f'{todays_date} currency_database.csv'), index_col = 0)
         updated_dates = [datetime.strptime(i, "%Y-%m-%d") for i in currency_database['date'].values]
         currency_database['date'] = updated_dates    
-        print(currency_database)
         return currency_database
         
     # Checking if the API uploaded todays FX rates, and deciding the start data depending on that. 
@@ -71,7 +69,6 @@ def convert_currency(cur1, cur2, database):
     Returns: how many cur2 is 1 cur1
     """
     
-    print(database)
     # these are values from EUR to the respective currencies
     base_cur1_value = database.loc[cur1]['rates'] # Say INR for eg
     base_cur2_value = database.loc[cur2]['rates'] # Say QAR for eg
@@ -103,8 +100,31 @@ def gen_latest_currency_database(currency_database):
     dates = [i for i in list(currency_database.loc['USD']['date'])]
     dates.sort()
     latest_date = dates[-1]
-    print(latest_date.isoformat())
     print(type(currency_database['date']))
     latest_currency_database = currency_database[currency_database['date'] == latest_date.date().isoformat()]
-    print(latest_currency_database)
     return latest_currency_database
+
+def gen_decade_graph(currency_1, currency_2):
+    currency_database = pd.read_csv(os.path.join(os.getcwd(), 'data', f'past23yearsdata.csv'), index_col = 0)
+    updated_dates = [datetime.strptime(i, "%Y-%m-%d") for i in currency_database['date'].values]
+    currency_database['date'] = updated_dates 
+    
+    # getting the unique dates in the entire database
+    dates = currency_database['date'].drop_duplicates(inplace = False)
+
+    currency_vals = []
+    dates_vals = []
+    for i in dates:
+        database = currency_database[currency_database['date'] == i]
+        try: 
+            currency_vals.append(convert_currency(currency_1, currency_2, database))
+            dates_vals.append(i)
+        except: 
+            print('Currency for this year not found')
+    plt.style.use('ggplot')
+    plt.figure(figsize = (10, 6))
+    plt.xlabel('Years')
+    plt.ylabel('Value')
+    plt.plot(dates_vals, currency_vals, linewidth = 1.5, marker = '.', color = 'purple')
+    # plt.title(f'Value of {cur1} to {cur2} in the Past Week')
+    plt.savefig(os.path.join(os.getcwd(), "images", f'{currency_1} to {currency_2} 1999 - 2020.png'), dpi=300)

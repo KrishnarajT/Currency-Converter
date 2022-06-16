@@ -98,8 +98,13 @@ class MainWindow(QMainWindow):
         self.label.resize(self.im.width(), self.im.height())
         self.week_text_lbl.setText(f'Value of {self.cur1} to {self.cur2} in the Past Week')
     
-    
-    
+        cd.gen_decade_graph(self.cur1, self.cur2)
+        self.im = QPixmap(os.path.join(os.getcwd(), 'images', f'{self.cur1} to {self.cur2} 1999 - 2020.png'))
+        self.im = self.im.scaledToHeight(self.historical_graph_frame.height())
+        self.label = QLabel(self.historical_graph_frame)
+        self.label.setPixmap(self.im)
+        self.label.resize(self.im.width(), self.im.height())
+        self.week_text_lbl.setText(f'Value of {self.cur1} to {self.cur2} in the Past 2 Decades')
     
     def setupUi(self):
         
@@ -305,7 +310,7 @@ class MainWindow(QMainWindow):
         self.historical_text_lbl.setObjectName("historical_text_lbl")
         
         self.historical_graph_frame = QtWidgets.QFrame(self.historical_tab)
-        self.historical_graph_frame.setGeometry(QtCore.QRect(80, 80, 800, 450))
+        self.historical_graph_frame.setGeometry(QtCore.QRect(120, 80, 750, 450))
         self.historical_graph_frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.historical_graph_frame.setFrameShadow(QtWidgets.QFrame.Raised)
         self.historical_graph_frame.setObjectName("historical_graph_frame")
