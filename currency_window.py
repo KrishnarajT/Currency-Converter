@@ -104,7 +104,7 @@ class MainWindow(QMainWindow):
         self.label = QLabel(self.historical_graph_frame)
         self.label.setPixmap(self.im)
         self.label.resize(self.im.width(), self.im.height())
-        self.week_text_lbl.setText(f'Value of {self.cur1} to {self.cur2} in the Past 2 Decades')
+        self.historical_text_lbl.setText(f'Value of {self.cur1} to {self.cur2} in the Past')
     
     def setupUi(self):
         
